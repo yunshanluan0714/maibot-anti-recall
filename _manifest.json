@@ -1,0 +1,40 @@
+{
+  "manifest_version": 2,
+  "id": "github.yunshanluan0714.anti-recall",
+  "version": "1.1.0",
+  "plugin_type": "management",
+  "name": "防撤回通知",
+  "description": "缓存最近群聊与私聊消息，检测到撤回事件后自动将原消息内容（支持配置一并补发图片、表情与语音）私聊转发给管理员；支持配置缓存条数、有效期与监听范围。",
+  "author": {
+    "name": "yunshanluan0714",
+    "url": "https://github.com/yunshanluan0714"
+  },
+  "license": "MIT",
+  "urls": {
+    "repository": "https://github.com/yunshanluan0714/maibot-anti-recall",
+    "homepage": "https://github.com/yunshanluan0714/maibot-anti-recall",
+    "documentation": "https://github.com/yunshanluan0714/maibot-anti-recall/blob/main/README.md",
+    "issues": "https://github.com/yunshanluan0714/maibot-anti-recall/issues"
+  },
+  "host_application": {
+    "min_version": "1.3.19",
+    "max_version": "1.4.99"
+  },
+  "sdk": {
+    "min_version": "2.20.0",
+    "max_version": "2.30.99"
+  },
+  "dependencies": [],
+  "capabilities": [
+    "chat.open_session",
+    "send.custom",
+    "send.hybrid",
+    "send.text"
+  ],
+  "i18n": {
+    "default_locale": "zh-CN",
+    "supported_locales": [
+      "zh-CN"
+    ]
+  }
+}

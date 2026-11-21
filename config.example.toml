@@ -1,0 +1,26 @@
+# 复制为 config.toml 或直接在 MaiBot WebUI 插件配置页修改；请勿将含个人账号的 config.toml 提交到仓库。
+
+[plugin]
+enabled = true
+config_version = "1.1.0"
+
+[notify]
+# 填入接收防撤回私聊通知的管理员 QQ 号列表，例如 ["100000001"]；留空时插件处于待命状态，不会缓存消息
+admin_user_ids = []
+resend_images = true
+resend_emojis = true
+max_images_per_alert = 10
+resend_voices = true
+max_voices_per_alert = 5
+notify_on_cache_miss = false
+
+[cache]
+max_messages = 500
+ttl_seconds = 600
+
+[scope]
+# 留空表示监听所有群聊；填写群号列表则仅监听指定群聊，例如 ["200000001"]
+groups = []
+monitor_private = true
+ignore_bot_self = true
+ignore_admin_self = false
