@@ -41,7 +41,7 @@
 | `scope` | `groups` | `[]` | 仅监听指定群号列表；留空表示监听所有群聊 |
 | `scope` | `monitor_private` | `true` | 是否监听好友私聊撤回 |
 | `scope` | `ignore_bot_self` | `true` | 是否忽略机器人自身发出的消息与撤回 |
-| `scope` | `ignore_admin_self` | `false` | 是否忽略管理员本人撤回自己的消息 |
+| `scope` | `ignore_admin_self` | `true` | 是否忽略管理员本人触发的撤回（含自撤回与管理员代撤回） |
 
 ## 能力权限说明
 

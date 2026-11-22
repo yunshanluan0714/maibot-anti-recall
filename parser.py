@@ -253,7 +253,8 @@ def parse_recall_notice(message: dict[str, Any], now: float) -> dict[str, Any] |
     group_id = str(payload.get("group_id") or group_info.get("group_id") or "").strip()
     group_name = str(group_info.get("group_name") or "").strip()
     sender_user_id = str(payload.get("user_id") or user_info.get("user_id") or "").strip()
-    operator_id = str(payload.get("operator_id") or sender_user_id).strip()
+    raw_operator = str(payload.get("operator_id") or "").strip()
+    operator_id = sender_user_id if (not raw_operator or raw_operator == "0") else raw_operator
     sender_name = str(user_info.get("user_cardname") or user_info.get("user_nickname") or sender_user_id).strip()
 
     plain_text = str(message.get("processed_plain_text") or "").strip()

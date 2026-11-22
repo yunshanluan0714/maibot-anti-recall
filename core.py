@@ -79,7 +79,7 @@ class AntiRecallStore:
         groups: list[str] | None = None,
         monitor_private: bool = True,
         ignore_bot_self: bool = True,
-        ignore_admin_self: bool = False,
+        ignore_admin_self: bool = True,
         clock=time.time,
     ) -> None:
         self.data_dir = Path(data_dir)

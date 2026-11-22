@@ -9,7 +9,7 @@ class PluginSection(PluginConfigBase):
     __ui_order__ = 0
 
     enabled: bool = Field(default=True, description="启用防撤回提醒；关闭后停止缓存新消息并暂停转发")
-    config_version: str = Field(default="1.1.0", description="配置版本")
+    config_version: str = Field(default="1.1.1", description="配置版本")
 
 
 class NotifySection(PluginConfigBase):
@@ -88,8 +88,8 @@ class ScopeSection(PluginConfigBase):
         description="是否忽略机器人自身账号发出的消息及其撤回",
     )
     ignore_admin_self: bool = Field(
-        default=False,
-        description="是否忽略管理员本人撤回自己的消息",
+        default=True,
+        description="是否忽略管理员本人触发的撤回（含自撤回与管理员代撤回）",
     )
 
 

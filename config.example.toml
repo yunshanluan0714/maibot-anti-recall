@@ -2,7 +2,7 @@
 
 [plugin]
 enabled = true
-config_version = "1.1.0"
+config_version = "1.1.1"
 
 [notify]
 # 填入接收防撤回私聊通知的管理员 QQ 号列表，例如 ["100000001"]；留空时插件处于待命状态，不会缓存消息
@@ -23,4 +23,4 @@ ttl_seconds = 600
 groups = []
 monitor_private = true
 ignore_bot_self = true
-ignore_admin_self = false
+ignore_admin_self = true

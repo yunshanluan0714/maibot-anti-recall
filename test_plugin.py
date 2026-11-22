@@ -117,8 +117,27 @@ class AntiRecallPluginTests(unittest.IsolatedAsyncioTestCase):
         self.assertTrue(self.plugin.config.notify.resend_images)
         self.assertTrue(self.plugin.config.notify.resend_voices)
         self.assertEqual(self.plugin.config.notify.max_voices_per_alert, 5)
+        self.assertTrue(defaults["scope"]["ignore_admin_self"])
+        self.assertTrue(self.plugin.config.scope.ignore_admin_self)
         schema = Plugin.build_config_schema(plugin_id="github.yunshanluan0714.anti-recall")
         self.assertGreaterEqual(len(schema["sections"]), 4)
+
+    async def test_admin_self_recall_is_ignored_by_default(self):
+        admin_msg = make_group_message("501")
+        admin_msg["message_info"]["user_info"]["user_id"] = "100000001"
+        admin_recall = make_recall_notice("501")
+        admin_recall["message_info"]["user_info"]["user_id"] = "100000001"
+        payload = admin_recall["message_info"]["additional_config"]["napcat_notice_payload"]
+        payload["user_id"] = 100000001
+        payload["operator_id"] = 100000001
+
+        await self.plugin.observe_message(message=admin_msg)
+        await self.plugin.observe_message(message=admin_recall)
+        await self._flush()
+
+        self.open_session.assert_not_awaited()
+        self.send_text.assert_not_awaited()
+        self.send_hybrid.assert_not_awaited()
 
     async def test_observe_caches_and_sends_private_text_and_hybrid_images(self):
         await self.plugin.observe_message(message=make_group_message("101"))

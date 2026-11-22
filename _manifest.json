@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "id": "github.yunshanluan0714.anti-recall",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "plugin_type": "management",
   "name": "防撤回通知",
   "description": "缓存最近群聊与私聊消息，检测到撤回事件后自动将原消息内容（支持配置一并补发图片、表情与语音）私聊转发给管理员；支持配置缓存条数、有效期与监听范围。",

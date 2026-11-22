@@ -425,6 +425,33 @@ class AntiRecallStoreTests(unittest.TestCase):
             finally:
                 standby.close()
 
+    def test_default_ignores_admin_recall_and_can_disable(self):
+        self.assertTrue(self.store.ignore_admin_self)
+        # Admin sends & recalls own group message -> ignored by default.
+        self.store.handle_message(group_msg("9101", user_id="100000001", ts=self.now))
+        self.assertIsNone(
+            self.store.handle_message(recall_notice("9101", user_id="100000001", operator_id="100000001", ts=self.now + 1))
+        )
+        # Admin recalls someone else's group message -> ignored by default.
+        self.store.handle_message(group_msg("9102", user_id="111222", ts=self.now + 2))
+        self.assertIsNone(
+            self.store.handle_message(recall_notice("9102", user_id="111222", operator_id="100000001", ts=self.now + 3))
+        )
+        # Admin recalls own private message -> ignored by default.
+        self.store.handle_message(private_msg("9103", user_id="100000001", ts=self.now + 4))
+        self.assertIsNone(
+            self.store.handle_message(
+                recall_notice("9103", notice_type="friend_recall", user_id="100000001", ts=self.now + 5)
+            )
+        )
+        # Opting out via ignore_admin_self=False still triggers as before.
+        self.store.ignore_admin_self = False
+        self.store.handle_message(group_msg("9104", user_id="100000001", ts=self.now + 6))
+        alert = self.store.handle_message(
+            recall_notice("9104", user_id="100000001", operator_id="100000001", ts=self.now + 7)
+        )
+        self.assertIsNotNone(alert)
+
 
 if __name__ == "__main__":
     unittest.main()
